@@ -1,0 +1,33 @@
+---
+layout: default
+title: Contact
+description: Here's how you can reach me
+---
+
+<div class="container mx-auto px-6 py-12">
+    <h1 class="text-4xl font-bold text-gray-800">{{ page.title }}</h1>
+    <p class="mt-4 text-xl text-gray-600">{{ page.description }}</p>
+
+    <div class="mt-8">
+        <ul class="mt-4 space-y-4">
+            <li class="flex items-center">
+                <span class="font-semibold text-gray-800">Email:</span>
+                <a href="mailto:{{site.email}}" class="ml-2 text-blue-500 hover:text-blue-700">{{site.email}}</a>
+            </li>
+            <li class="flex items-center">
+                <span class="font-semibold text-gray-800">Phone number:</span>
+                <span class="ml-2 text-gray-700">{{site.phone}}</span>
+            </li>
+            <li class="flex items-center">
+                <span class="font-semibold text-gray-800">LinkedIn:</span>
+                <a href="https://www.linkedin.com/in/{{site.linkedin_username}}"
+                    class="ml-2 text-blue-500 hover:text-blue-700">{{site.linkedin_username}}</a>
+            </li>
+            <li class="flex items-center">
+                <span class="font-semibold text-gray-800">GitHub:</span>
+                <a href="https://github.com/{{site.github_username}}"
+                    class="ml-2 text-blue-500 hover:text-blue-700">{{site.github_username}}</a>
+            </li>
+        </ul>
+    </div>
+</div>

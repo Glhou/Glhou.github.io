@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Staggered Card Layout */
+@layer components {
+    .staggered-card {
+        position: relative;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    @media (min-width: 768px) {
+        .staggered-card:nth-child(odd) {
+            transform: translateY(0);
+            /* No translation for odd items */
+            opacity: 0;
+            animation: fadeInDown 0.5s ease-in-out forwards;
+            animation-delay: 500ms;
+        }
+
+        /* Apply translation and delay to even items */
+        .staggered-card:nth-child(even) {
+            transform: translateY(50%);
+            /* Move down by half the height */
+            opacity: 0;
+            /* Initially hidden */
+            animation: fadeInUp 0.5s ease-in-out forwards;
+            animation-delay: 500ms;
+            /* Delay for even cards */
+        }
+    }
+}
+
+
+/* Define the fade-in-up animation */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(0%);
+        /* Start with the translation down */
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(50%);
+        /* End at normal position */
+    }
+}
+
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(50%);
+        /* Start with the translation down */
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0%);
+        /* End at normal position */
+    }
+}

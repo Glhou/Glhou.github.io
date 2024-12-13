@@ -1,0 +1,40 @@
+---
+layout: default
+title: Home
+---
+
+<div class="container mx-auto py-12">
+    <!-- Welcoming message -->
+
+    <div class="text-center">
+        <div class="container mx-auto px-6 py-12">
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white shadow-lg rounded-lg p-6">
+                    <h1 class="text-4xl font-bold text-gray-800">Welcome to My Portfolio!</h1>
+                    <p class="mt-4 text-xl text-gray-600">{{ site.description }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Projects list -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 mb-32">
+        {% for project in site.projects %}
+        <div
+            class="staggered-card relative group bg-gray-700 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 ">
+            <a href="{{ project.url }}">
+                {% if project.image %}
+                <img src="{{ project.image }}" alt="{{ project.name }}"
+                    class="w-full h-48 object-cover object-center group-hover:scale-105 transition-all duration-300">
+                {% else %}
+                <div class="w-full h-48 bg-gray-800"></div>
+                {% endif %}
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-gray-200">{{ project.title }}</h3>
+                    <p class="text-sm text-gray-400 truncate">{{ project.description | slice: 0, 100 }}...</p>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>

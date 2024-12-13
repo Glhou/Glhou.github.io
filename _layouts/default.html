@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    <link rel="javascript" href="{{ '/assets/js/script.js' | relative_url }}">
+</head>
+
+<body>
+
+    <div class="flex flex-col min-h-screen">
+        <!-- Header -->
+        {% include header.html %}
+
+        <!-- Main Content -->
+        <main class="flex-grow p-4 bg-gray-200">
+            {{ content}}
+        </main>
+
+        <!-- Footer -->
+        {% include footer.html %}
+    </div>
+</body>
+
+</html>

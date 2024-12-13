@@ -31,38 +31,42 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Setup Ruby
-        uses: ruby/setup-ruby@8575951200e472d5f2d95c625da0c7bec8217c42 # v1.161.0
+        uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1' # Not needed with a .ruby-version file
-          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-          cache-version: 0 # Increment this number if you need to re-download cached gems
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20.18.0'  # Specify the Node.js version you want to use
-      - name: Install Node.js dependencies
-        run: |
-          npm install  # This installs dependencies listed in package.json
+          ruby-version: '3.1'
+          bundler-cache: true  # Cache Bundler dependencies
+
+      # Install Bundler explicitly if necessary
+      - name: Install Bundler
+        run: gem install bundler
+
+      # Clear Bundler cache (optional)
+      - name: Clear Bundler cache
+        run: bundle clean --force
+
+      # Install dependencies
       - name: Install Ruby dependencies
-        run: |
-          bundle install
-      - name: Setup Pages
+        run: bundle install
+
+      - name: Setup Pages configuration
         id: pages
         uses: actions/configure-pages@v5
+
+      # Build the Jekyll site
       - name: Build with Jekyll
-        # Outputs to the './_site' directory by default
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
-      - name: Build Node.js assets
-        run: |
-          npm run build  # This step assumes you have a 'build' script in package.json to compile assets  
+
+      # Upload the artifact from the build output
       - name: Upload artifact
-        # Automatically uploads an artifact from the './_site' directory by default
         uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site  # Specify the directory to upload as artifact
 
   # Deployment job
   deploy:
